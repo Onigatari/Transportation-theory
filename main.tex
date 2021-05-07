@@ -470,11 +470,117 @@
 	\clearpage
 	
 	\subsection{Метод наименьшего элемента}
+	Ключевая идея заключается в следующем: определяем ячейку транспортной таблицы с наименьшим значением тарифа на перевозку груза (если окажется, что есть несколько ячеек с одинаковыми и минимальными тарифами — выбираем любую из них).
 	
+	В эту ячейку выписываем максимально возможный объем груза, который можно доставить с соответствующего этой ячейке склада на соответствующий завод.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{10}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	Объемы запасов и потребностей уменьшаются на величину груза. Если запасы склада исчерпаны, то полностью вычеркиваем эту строку таблицы. Если потребности завода полностью удовлетворены — полностью вычеркиваем этот столбец таблицы.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & \textbf{1} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	Продолжаем в том же духе до тех пор, пока все запасы не будут исчерпаны, а все потребности удовлетворены.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{10}} \\ \cline{2-7}
+			&  & 4 &  & \textbf{1} &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & \textbf{2} & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{5} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{1}{c|}{\multirow{2}{*}{5}} \\ \cline{2-7}
+			&  & \textbf{3} &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{5} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{5} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & \textbf{4} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	В итоге мы получим опорный план перевозок для транспортной задачи.
+	
+	\begin{equation}
+		X = 
+		\begin{pmatrix}
+			0 & 0 & 10 \\
+			15 & 0 & 5 \\
+			0 & 20 & 10 \\ 
+		\end{pmatrix}
+	\end{equation}
 	\clearpage
 	
 \section{Проверка опорного плана на вырожденность}
-
+	Как известно, транспортная задача бывает открытая и закрытая. Однако на практике чаще всего попадается открытый тип транспортной задачи. Способ борьбы с этим уже был рассмотрен.
+	
+	Так же известны и другие виды задачи - вырожденной и невырожденной.
+	
+	Вырожденной является такая задача, в которой количество клеток в плане меньше $m+n-1$. Способ борьбы с ним довольно много: от случайно размещаемых нулевых клеток в плане до перебора по очереди всех пустых клеток. Однако такой путь не дает гарантий в том, что вновь размещенная клетка не образует \textbf{цикл} с имеющимися клетками.
+	
 	\clearpage
 	
 \section{Методы решения}
