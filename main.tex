@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[main = russian,english]{babel}
+\usepackage[russian,english]{babel}
 \usepackage[14pt]{extsizes}
 \usepackage{cmap}
 \usepackage{indentfirst}
@@ -16,9 +16,12 @@
 \usepackage{multirow}
 \usepackage{setspace,amsmath}
 \usepackage[table,xcdraw]{xcolor}
+\usepackage[unicode, pdftex]{hyperref}
 \usepackage[left=15mm, top=20mm, right=15mm, bottom=20mm, nohead, footskip=15mm]{geometry}
 
+
 \begin{document}
+\selectlanguage{russian}
 \setcounter{page}{-1}
 
 \begin{center}
@@ -77,11 +80,12 @@
 \begin{center} Владикавказ 2021 \end{center}
 
 \thispagestyle{empty}
-\tableofcontents{}
+\tableofcontents
 \thispagestyle{empty}
 \clearpage
+\newtheorem{theorem}{Теорема}
 
-\section{Введение}
+\section {Введение}
 	\textbf{Транспортная задача} – это спектр задач с единой математической моделью, классическая формулировка, которой звучит: \textit{«Задача о наиболее экономном плане перевозок однородного продукта или взаимозаменяемых продуктов из пунктов производства в пункты потребления»}. Такая форма встречается чаще всего в линейном программирование, а если точнее в его практических приложениях. 
 	
 	\textbf{Линейное программирование} является одним из разделов математического программирования – области математики, разрабатывающей теорию и численные методы решения многомерных экстремальных задач с ограничениями.
@@ -119,15 +123,15 @@
 	Так же для корректности задачи необходимо соблюдать три условия:
 	
 	\[
-		\textbf{1.} \sum\limits_{i=1}^n x_{ij} = b_j; (j = 1, 2, ..., m) 
+		\textbf{1.} \sum\limits_{i=1}^n x_{ij} = b_j; \ \ (j = 1, 2, ..., m) 
 	\]
 	
 	\[
-		\textbf{2.} \sum\limits_{j=1}^m x_{ij} = a_i; (i = 1, 2, ..., n)
+		\textbf{2.} \sum\limits_{j=1}^m x_{ij} = a_i; \ \ (i = 1, 2, ..., n)
 	\]
 	
 	\[
-		\textbf{3.} x_{ij} \geqslant 0; (i = 1, 2, ..., n; j = 1, 2, ..., m)
+		\textbf{3.} x_{ij} \geqslant 0; \ \ (i = 1, 2, ..., n; \ \ j = 1, 2, ..., m)
 	\]
 
 	Получается суммарные затраты на транспортировку в каждый пункт потребления завозится требуемое количество продукта, а так же из каждого пункта производства полностью вывозится произведенный продукт.
@@ -137,10 +141,10 @@
 	\begin{equation}
 		X = 
 		\begin{pmatrix}
-			x_{1,1} & x_{1,2} & \cdots & x_{1,n} \\
-			x_{2,1} & x_{2,2} & \cdots & x_{2,n} \\
+			x_{11} & x_{12} & \cdots & x_{1n} \\
+			x_{21} & x_{22} & \cdots & x_{2n} \\
 			\vdots  & \vdots  & \ddots & \vdots  \\
-			x_{m,1} & x_{m,2} & \cdots & x_{m,n} 
+			x_{m1} & x_{m2} & \cdots & x_{mn} 
 		\end{pmatrix}
 	\end{equation}
 
@@ -164,7 +168,6 @@
 
 	Рассмотрим теорему о разрешимости транспортной задачи:
 	
-	\newtheorem{theorem}{Теорема}
 	\begin{theorem}
 		Транспортная задача имеет решение, если суммарный запас груза в пунктах отправления равен суммарному спросу в пунктах назначения, т.е. если выполняется равенство (1).
 	\end{theorem}
@@ -182,7 +185,7 @@
 		Соответствующие тарифы считаются равными нулю: 
 		
 		\[
-			c_{i m+1} = 0 (i=1, \cdots ,m)
+			c_{i m+1} = 0 \ \ (i=1, \cdots ,m)
 		\]
 		
 		После этих преобразований получим закрытую модель транспортной задачи.
@@ -198,13 +201,45 @@
 		а тарифы полагаются равными нулю:
 		
 		\[ 
-			c_{n+1 j} = 0 (j=1, \cdots ,n)
+			c_{n+1 j} = 0 \ \ (j=1, \cdots ,n)
 		\]
 		 
 		После этих преобразований получим закрытую модель транспортной задачи.
+		
+		Теперь если в любом случаи мы можем свести задачу к виду 
+		$
+			\sum\limits_{i=1}^n a_i = \sum\limits_{j=1}^m b_j = A
+		$ можем получить такие величины
+		
+		\[
+			x_{ij} = {{a_i b_j}\over{A}}; \ \ i = 1, 2, ..., n; \ \ j = 1,2, ..., m
+		\]
+		
+		Исходя из выше полученного имеем решение:
+		
+		\[
+			x_{ij} \geqslant 0
+		\]
+		
+		Так как 
+		$
+		\sum\limits_{i=1}^n a_i = \sum\limits_{j=1}^m b_j = A
+		$ получаем: 
+		
+		\[
+			\sum\limits_{j=1}^m x_{ij} = \sum\limits_{j=1}^m {{a_i b_j}\over{A}} = 
+			{{a_i \sum\limits_{j=1}^m b_j}\over{A}} = a_i
+		\]
+		
+		\[
+			\sum\limits_{i=1}^n x_{ij} = \sum\limits_{i=1}^n {{a_i b_j}\over{A}} = 
+			{{b_j \sum\limits_{i=1}^n a_i}\over{A}} = b_j
+		\]
+		
+		Следовательно, система величин $x_{ij}$, удовлетворяя всем условиям транспортной задачи, является ее решением.
 	\end{proof}
 
-	Полученные условия транспортной задачи удобно представить в виде матрицы, которая имеет название \textbf{матрица перевозок}. В первой строке указаны величины потребностей, в первом столбце - значения запасов. В клетках внутренней матрицы ($m \times n$ штук) записывают стоимости перевозок и сами перевозки. Нумеровать будем только строки и столбцы внутренней матрицы.
+	Условия транспортной задачи удобно представить в виде матрицы, которая имеет название \textbf{матрица перевозок}. В первой строке указаны величины потребностей, в первом столбце - значения запасов. В клетках внутренней матрицы ($m \times n$ штук) записывают стоимости перевозок и сами перевозки. Нумеровать будем только строки и столбцы внутренней матрицы.
 	
 	\textbf{Пример:}
 	
@@ -213,13 +248,16 @@
 		\textit{Таблица 2.2}
 	\end{flushright}
 	\begin{center}
-		\begin{tabular}{c|cccccc}
-			\cline{2-7}
-			& \multicolumn{1}{c|}{$b_j$} & \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{40} & \multicolumn{1}{c|}{20} & \multicolumn{1}{c|}{60} & \multicolumn{1}{c|}{20} \\ \hline
-			\multicolumn{1}{|c|}{$a_i$} &  &  &  &  &  &  \\ \cline{1-1} \cline{3-7} 
-			\multicolumn{1}{|c|}{30} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{2} \\ \cline{1-1} \cline{3-7} 
-			\multicolumn{1}{|c|}{70} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{9} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{3} \\ \cline{1-1} \cline{3-7} 
-			\multicolumn{1}{|c|}{50} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{4} \\ \cline{1-1} \cline{3-7} 
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{2}{c|}{B5} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-11}
+			&  & 2 &  & 7 &  & 3 &  & 6 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{70}} \\ \cline{2-11}
+			&  & 9 &  & 4 &  & 5 &  & 7 &  & 3 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{50}} \\ \cline{2-11}
+			&  & 5 &  & 7 &  & 6 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{60} & \multicolumn{2}{c|}{20} &  \\ \cline{1-11}
 		\end{tabular}
 	\end{center}
 
@@ -228,136 +266,256 @@
 		 \sum\limits_{j=1}^5 b_{j} = 10 + 40 + 20 + 60 + 20 = 150 
 	\]
 	
-	В качестве примера открытой модели давайте заменим потребность $b_4$, которая равняется 60 на 40. В таком случаи нужно было бы ввести еще одного потребителя с потребностью $b_6 = 20$ и с нулевыми стоимостями $c_{16} = c_{26} = c_{36} = 0$. Матрица перевозок тогда станет следующей:
+	В качестве примера открытой модели давайте заменим потребность $B4$, которая равняется 60 на 40. В таком случаи нужно было бы ввести еще одного потребителя с потребностью $B6 = 20$ и с нулевыми стоимостями $c_{16} = c_{26} = c_{36} = 0$. Матрица перевозок тогда станет следующей:
 	
 	\begin{flushright}
 		\textit{Таблица 2.3}
 	\end{flushright}
 	\begin{center}
-		\begin{tabular}{c|ccccccc}
-			\cline{2-8}
-			& \multicolumn{1}{c|}{$b_j$} & \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{40} & \multicolumn{1}{c|}{20} & \multicolumn{1}{c|}{40} & \multicolumn{1}{c|}{20} & \multicolumn{1}{l|}{20} \\ \hline
-			\multicolumn{1}{|c|}{$a_i$} &  &  &  &  &  &  & \multicolumn{1}{l}{} \\ \cline{1-1} \cline{3-8} 
-			\multicolumn{1}{|c|}{30} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{0} \\ \cline{1-1} \cline{3-8} 
-			\multicolumn{1}{|c|}{70} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{9} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{0} \\ \cline{1-1} \cline{3-8} 
-			\multicolumn{1}{|c|}{50} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{6} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{0} \\ \cline{1-1} \cline{3-8} 
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|l|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{2}{c|}{B5} & \multicolumn{2}{c|}{B6} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-13}
+			&  & 2 &  & 7 &  & 3 &  & 6 &  & 2 &  & 0 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{70}} \\ \cline{2-13}
+			&  & 9 &  & 4 &  & 5 &  & 7 &  & 3 &  & 0 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{\textbf{}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{50}} \\ \cline{2-13}
+			&  & 5 &  & 7 &  & 6 &  & 2 &  & 4 &  & 0 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{20} &  \\ \cline{1-13}
 		\end{tabular}
 	\end{center}
 
-	Запишем пример закрытой модели в полном виде:
-	
-	\begin{equation}
-		\begin{cases}
-			Z = \sum\limits_{i=1}^n \sum\limits_{j=1}^m c_{ij}x_{ij} \longrightarrow \min \\
-			x_{11} + x_{12} + x_{13} + x_{14} + x_{15} = 30\\
-			x_{21} + x_{22} + x_{23} + x_{24} + x_{25} = 70\\
-			x_{31} + x_{32} + x_{33} + x_{34} + x_{35} = 50\\
-			x_{11} + x_{21} + x_{31} = 10\\
-			x_{12} + x_{22} + x_{32} = 40\\
-			x_{13} + x_{23} + x_{33} = 20\\
-			x_{14} + x_{24} + x_{34} = 60\\
-			x_{15} + x_{25} + x_{35} = 20\\
-			x_{11} + x_{21} + x_{31} = 10\\ 
-			\forall (i,j): x_{ij} \geqslant 0
-		\end{cases}
-	\end{equation}
 	\clearpage
 
-\section{Методы построения опорного решения}
-	Прежде чем исследовать методы нахождения опорного решения транспортной задачи, рассмотрим теорему о ранге матрицы из коэффициентов при неизвестных системы ее ограничений.
-	
+\section{Методы построения опорного плана}
+	\subsection{Метод северо-западного угла}
 	\begin{theorem}
-		Ранг матрицы из коэффициентов при неизвестных системы ограничений транспортной задачи равен $(m + n - 1)$, где $m$ и $n$ - количество поставщиков и потребителей соответственно.
+		Существует план, содержащее не более чем $(m + n - 1)$ положительных перевозок $x_{ij}$. При этом система векторов соответствующая таким перевозкам $x_{ij}$, линейно независима. 
 	\end{theorem}
-	
-	Каждую неизвестную запишем в свой столбец и получим такую систему:
-	\begin{equation}
-		\begin{Bmatrix}
-			x_{11} + x_{12} + \cdots + x_{1m} & & & = a_1\\
-			& x_{21} + x_{22} + \cdots + x_{2m} & & = a_2\\
-			\cdots & \cdots & \cdots & & \\
-			& & x_{n1} + x_{n2} + \cdots + x_{nm} & = a_n\\
-			\hline
-			x_{11} & + x_{21} & + x_{n1} & = b_1 \\
-			x_{12} & + x_{22} & + x_{n2} & = b_2 \\
-			\cdots & \cdots & \cdots & & \\
-			x_{1n} & + x_{2n} & + x_{nm} & = b_m \\
-		\end{Bmatrix}
-	\end{equation}
 
-	Матрица $A$ их коэффициентов при неизвестных системы ограничений имеет вид:
+	\begin{proof}
+		Конструктивным доказательством теоремы может послужить процесс получения первого опорного плана, предложенный Данцигом и названный Чарнесом и Купером \textbf{«правилом северо-западного угла»}. Применим это правило к следующей таблице:
+		
+		\begin{center}
+			\begin{tabular}{cccc|c}
+				$x_{11}$ & $x_{12}$ & $x_{13}$ & $x_{14}$ & $a_1$ \\
+				$x_{21}$ & $x_{22}$ & $x_{23}$ & $x_{24}$ & $a_2$ \\
+				$x_{31}$ & $x_{32}$ & $x_{33}$ & $x_{34}$ & $a_3$ \\ \hline
+				$b_1$ & $b_2$ & $b_3$ & $b_4$ & 
+			\end{tabular}
+		\end{center}
 	
-	\begin{equation}
-		A = 
-		\begin{bmatrix}
-			11 \ldots 1 & 00 \ldots 0 & 00 \ldots 0 \\
-			00 \ldots 0 & 11 \ldots 1 & 00 \ldots 0 \\
-			\ldots & \ldots & \ldots \\
-			00 \ldots 0 & 00 \ldots 0 & 11 \ldots 1 \\
-			10 \ldots 0 & 10 \ldots 0 & 10 \ldots 0 \\
-			01 \ldots 0 & 01 \ldots 0 & 01 \ldots 0 \\
-			\ldots & \ldots & \ldots \\
-			00 \ldots 1 & 00 \ldots 1 & 00 \ldots 1 \\
-		\end{bmatrix}
-	\end{equation}
+		Определим сначала значение переменной $x_{11}$, стоящей в верхнем левом углу. Пусть $x_{11} = \min(a_1,b_1)$; если $a_1 \leqslant b_1$, то $x_{11} = a_1$ и все $x_{1j} = 0$ для $j = 2,\ 3,\ 4$. Если $a_1 \geqslant b_1$, то $x_{11} = b_1$, и все $x_{i1} = 0$ для $i = 2,\ 3,\ 4$. Для определенности допустим, что справедливо первое предположение; тогда таблица преобразуется, как показано ниже в шаге 1. Здесь общее количество продукта, вывозимого из первого пункта отправления, уменьшается до нуля, а общее количество, которое необходимо подвезти к первому пункту назначения, равно $b_1 - a_1$.
+		
+		\textit{Шаг 1:} Пример $b_1 > a_1$
+		
+		\begin{center}
+			\begin{tabular}{cccc|c}
+				$x_{11} = a_1$ & $0$ & $0$ & $0$ & $0$ \\
+				$x_{21}$ & $x_{22}$ & $x_{23}$ & $x_{24}$ & $a_2$ \\
+				$x_{31}$ & $x_{32}$ & $x_{33}$ & $x_{34}$ & $a_3$ \\ \hline
+				$b_1 - a_1$ & $b_2$ & $b_3$ & $b_4$ & 
+			\end{tabular}
+		\end{center}
+		
+		После этого определяем значение первой переменной во второй строке.  Пусть $x_{21} = \min(a_2, b_1 - a_1)$. Если допустить, что $a_2 > b_1 - a_1$, $x_{21} = b_1, - а_1$, и $х_{31} = 0$. Это показано в шаге 2. Количество продукта, которое осталось перевезти из пункта отправления 2, теперь равно $a_2 - b_1 + a_1$. В свою очередь потребность первого пункта назначения полностью удовлетворена.
+		
+		\textit{Шаг 2:} Допустим, что $a_2 > b_1 - a_1$.
+		\begin{center}
+			\begin{tabular}{cccc|c}
+				$x_{11} = a_1$ & $0$ & $0$ & $0$ & $0$ \\
+				$x_{21} = b_1 - a_1$ & $x_{22}$ & $x_{23}$ & $x_{24}$ & $a_2 - b_1 + a_1$ \\
+				$0$ & $x_{32}$ & $x_{33}$ & $x_{34}$ & $a_3$ \\ \hline
+				$0$ & $b_2$ & $b_3$ & $b_4$ & 
+			\end{tabular}
+		\end{center}
+		
+		Подобным же образом в зависимости от допущений, указанных далее, получаем следующие шаги. В каждом из них определяется значение переменной $x_i$, и сводится к нулю либо запас $і$-го пункта отправления, либо потребность $j$-го пункта назначения, или и то и другое вместе.
+		
+		\textit{Шаг 3:} Положим $a_2 - b_1 + a_1 > b_2$.
+		\begin{center}
+			\begin{tabular}{cccc|c}
+				$x_{11} = a_1$ & $0$ & $0$ & $0$ & $0$ \\
+				$x_{21} = b_1 - a_1$ & $x_{22} = b_2$ & $x_{23}$ & $x_{24}$ & $a_2 - b_1 + a_1 - b_2$ \\
+				$0$ & $0$ & $x_{33}$ & $x_{34}$ & $a_3$ \\ \hline
+				$0$ & $0$ & $b_3$ & $b_4$ & 
+			\end{tabular}
+		\end{center}
 	
-	Нетрудно видеть, что любую строку матрицы можно выразить в виде линейной комбинации остальных ее строк. Сложив коэффициенты первых $n$ строк матрицы $A$, a потом коэффициенты последующих $m - 1$ строк и вычтя из первой суммы вторую, получим элементы последней строки матрицы. Отсюда заключаем, что ранг матрицы $А$ не будет изменяться при вычеркивании одной какой-нибудь ее строки.
+		\textit{Шаг 4:} Пусть $a_2 - b_1 + a_1 - b_2 < b_3$.
+		\begin{center}
+			\begin{tabular}{cccc|c}
+				$x_{11} = a_1$ & $0$ & $0$ & $0$ & $0$ \\
+				$x_{21} = b_1 - a_1$ & $x_{22} = b_2$ & $x_{23} = a_2 - b_1 + a_1 - b_2$ & $0$ & $0$ \\
+				$0$ & $0$ & $x_{33}$ & $x_{34}$ & $a_3$ \\ \hline
+				$0$ & $0$ & $b_3 - a_2 + b_1 - a_1 + b_2$ & $b_4$ & 
+			\end{tabular}
+		\end{center}
+		
+		Из шага 4 видно, что $x_{33} = b_3 - a_2 + b_1 - a_2 + b_2$ и $x_{34} = b_4$. Следует отметить, что каждая из перевозок $x_i$ была получена прибавлением и вычитанием различных комбинаций $a_i$ и $b_j$. Поэтому если  $a_i$ и $b_j$ были первоначально неотрицательными целыми числами, то и решение, получаемое в результате описанного выше процесса, будет состоять из неотрицательных целых чисел. Нетрудно видеть, что этот план может содержать самое большее $n + m - 1$ положительных перевозок. При наших предположениях относительно величин  $a_i$ и $b_j$, и допущениях, сделанных при построении плана в рассмотренном примере с тремя пунктами отправления и четырьмя пунктами назначения, положительными перевозками являются:
+		
+		\begin{center}
+			$x_{11} = a_1; \ \ x_{21} = b_1 - a_1;$ \\
+			$x_{22} = b_2; \ \ x_{23} = a_2 - b_1 + a_1 - b_2;$ \\
+			$x_{33} = b_3 - a_2 + b_1 - a_1 + b_2; \ \ x_{34} = b_4;$ \\
+		\end{center}
+		
+		Используя приведенный алгоритм построения решения, можно доказать линейную независимость системы векторов, отвечающих выписанным положительным перевозкам. Тем самым будет установлено, что построенный план является опорным решением.
+	\end{proof}
 	
-	Вычеркнем последнюю строку матрицы $A$ и вычислим минор $M_{n + m - 1}$ , образованный из $(n + m - 1)$ столбцов коэффициентов при следующих неизвестных: $x_{1m}, x_{2m}, \ldots, x_{mn}, x_{11}, x_{12}, \ldots, x_{1, m - 1}$
+	\textbf{Пример:}
 	
-	\begin{equation}
-		M_{n + m - 1} = 
-		\begin{bmatrix}
-			10 \ldots 0 & 11 \ldots 1\\
-			01 \ldots 0 & 00 \ldots 0\\
-			\ldots & \ldots\\
-			00 \ldots 1 & 00 \ldots 0\\
-			10 \ldots 0 & 10 \ldots 0\\
-			01 \ldots 0 & 01 \ldots 0\\
-			\ldots & \ldots\\
-			00 \ldots 0 & 00 \ldots 1\\
-		\end{bmatrix}
-		= 1
-	\end{equation}
+	Имеется транспортная таблица с исходными данными.
+	\begin{center}
+		\begin{tabular}{cccccccc}
+			\hline
+			\multicolumn{1}{|c|}{Пункты} & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A1}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{10}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A2}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A3}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{Потребность} & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+			\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}
+		\end{tabular}
+	\end{center}
 	
-	Так как минор не равен нулю, то количество линейно независимых строк в матрице $A$ будет $n + m - 1$, т.е. ранг матрицы $A$ равен $n + m - 1$.
-	
-	Из рассмотренной теоремы следует, что опорное решение транспортной задачи должно содержать $n + m - 1$ базисных неизвестных и $nm - (n + m - 1)$ небазисных, равных нулю неизвестных.
-	
-	Циклом, или замкнутым контуром, называется последовательность клеток $(i, j)$ транспортной задачи, в которой каждые две рядом стоящие клетки находятся в одной строке или одном столбце, при этом первая и последняя	клетки совпадают.
-	
-	Например, $\nu = [(1,2);(1,4);(3,4);(3,2);(1,2)]$ есть цикл.
+	Внесем в верхнюю левую клетку максимально возможного объема перевозки.
 	
 	\begin{center}
-		\begin{tabular}{|c|c|c|c|c|}
+		\begin{tabular}{cccccccc}
 			\hline
-			$\begin{matrix} & j \\ i & \\ \end{matrix}$ & 1 & 2 & 3 & 4 \\ \hline
-			1 &  & $\odot$ & --- & $\odot$ \\ \hline
-			2 &  & $|$ &     & $|$ \\ \hline
-			3 &  & $\odot$ & --- & $\odot$ \\ \hline
+			\multicolumn{1}{|c|}{Пункты} & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A1}} & \multicolumn{2}{c|}{\textbf{10}} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{5} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A2}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{20}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{3} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{\multirow{2}{*}{A3}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{2} & \multicolumn{1}{c|}{} \\ \hline
+			\multicolumn{1}{|c|}{Потребность} & \multicolumn{2}{c|}{5} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+			\multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}
+		\end{tabular}
+	\end{center}
+
+	Запасы на складе $A1$ закончились, поэтому в оставшиеся ячейки данной строки ставим прочерки. Затем переходим к следующей строке и заполняем ее ячейки слева направо.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{10}} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{15}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
 		\end{tabular}
 	\end{center}
 	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{10}} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{\textbf{15}} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{5} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+	
+	Переходим к третьей строке и тоже заполняем ее слева направо.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{10}} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{\textbf{15}} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{25}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{\textbf{10}} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 5 &  & 3 &  & 1 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{\textbf{15}} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 3 &  & 2 &  & 4 & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{\textbf{5}} & \multicolumn{2}{c|}{\textbf{25}} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-7}
+			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} &  \\ \cline{1-7}
+		\end{tabular}
+	\end{center}
+
+	Получено опорное решение:
+	\begin{equation}
+		X = 
+		\begin{pmatrix}
+			10 & 0 & 0 \\
+			5 & 15 & 0 \\
+			0 & 5 & 25 \\ 
+		\end{pmatrix}
+	\end{equation}
+	\clearpage
+	
+	\subsection{Метод наименьшего элемента}
+	
+	\clearpage
+	
+\section{Проверка опорного плана на вырожденность}
+
+	\clearpage
+	
+\section{Методы решения}
+	\subsection{Метод северо-западного угла}
+	
+	\clearpage
+	
+	\subsection{Метод наименьшего элемента}
+	
+	\clearpage
+	
+	\subsection{Метод потенциалов}
+	
+	Метод состоит из конечного числа итераций, с помощью которых по некоторому исходному плану задачи строится ее оптимальное решение. Каждая итерация разбивается на $2$ этапа. На $1$-ом этапе план, полученный в результате предыдущей итерации, проверяется на оптимальность. Если план оказывается решением, процесс заканчивается. Если же это не так, осуществляется переход к этапу $2$. На $2$-ом этапе строится новый план, приводящий к меньшим (по сравнению с предыдущим планом) транспортным издержкам. Перед тем, как начать детальное рассмотрение метода, введем несколько необходимых понятий.
+	
 	\clearpage
 
-	\begin{thebibliography}{3}
-		\bibitem{1}
-		Юдин Д.Б., Гольштейн Е.Г. Задачи и методы линейного программирования;
-		Москва: Советское радио, 1969. - 736с.
-		\bibitem{2}
-		Канторович Л.В., Горстко А.Б. Математическое оптимальное программирование  в экономике;
-		Москва: Знание, 1968. - 96с.
-		\bibitem{3}
-		Палий И.А., Линейное программирование. Учебное пособие;
-		Москва: Эксмо, 2008. - 256с.
-		\bibitem{4} 
-		Костевич Л.C. Математическое программирование. Информационные технологии оптимальных решений;
-		Минск: Новое знание, 2003. - 424c.
-		\bibitem{5}
-		Акулич И.Л. Математическое программирование в примерах и задачах; Санкт-Петербург: Лань, 2011 - 352с.
-		\bibitem{6}
-		Данциг Д. Линейное программирование, его обобщения и применения; Москва: Прогресс, 1966 - 602с.
-		\bibitem{7}
-	\end{thebibliography}
+\section{Решение с помощью теории графов}
+
+	\clearpage
+
+\begin{thebibliography}{99}
+	\addcontentsline{toc}{section}{Список литературы}
+	\bibitem{1}
+	Юдин Д.Б., Гольштейн Е.Г. Задачи и методы линейного программирования;
+	Москва: Советское радио, 1969 - 736с.
+	\bibitem{2}
+	Канторович Л.В., Горстко А.Б. Математическое оптимальное программирование  в экономике;
+	Москва: Знание, 1968 - 96с.
+	\bibitem{3}
+	Палий И.А., Линейное программирование. Учебное пособие;
+	Москва: Эксмо, 2008 - 256с.
+	\bibitem{4} 
+	Костевич Л.C. Математическое программирование. Информационные технологии оптимальных решений;
+	Минск: Новое знание, 2003 - 424c.
+	\bibitem{5}
+	Акулич И.Л. Математическое программирование в примерах и задачах; Санкт-Петербург: Лань, 2011 - 352с.
+	\bibitem{6}
+	Данциг Д. Линейное программирование, его обобщения и применения; Москва: Прогресс, 1966 - 602с.
+	\bibitem{7}
+	Гасс С. Линейное программирование; Москва: Физматгиз, 1961 - 303с.
+\end{thebibliography}
 
 \end{document} 
