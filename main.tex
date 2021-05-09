@@ -432,9 +432,6 @@
 			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
 			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
 		\end{tabular}
-	\end{center}
-	
-	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c}
 			\hline
 			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
@@ -462,9 +459,6 @@
 			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
 			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
 		\end{tabular}
-	\end{center}
-
-	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c}
 			\hline
 			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
@@ -537,9 +531,6 @@
 			&  & 4 &  & \textbf{1} &  & 2 & \multicolumn{1}{c|}{} \\ \hline
 			Потребность & \multicolumn{2}{c|}{15} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{25} &  \\ \cline{1-7}
 		\end{tabular}
-	\end{center}
-
-	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c}
 			\hline
 			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
@@ -565,9 +556,6 @@
 			&  & 4 &  & 1 &  & 2 & \multicolumn{1}{c|}{} \\ \hline
 			Потребность & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{5} &  \\ \cline{1-7}
 		\end{tabular}
-	\end{center}
-
-	\begin{center}
 		\begin{tabular}{|c|c|c|c|c|c|c|c}
 			\hline
 			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{1}{c|}{Запасы} \\ \hline
@@ -599,6 +587,81 @@
 	При построении опорного решения могут возникнуть трудности, если суммы и по строкам, и по столбцам равны между собой и обратились в $0$. В этом случае из дальнейших рассмотрений следует исключить только одну из них. Другая сумма будет ликвидирована при присвоении базисной переменной значения 0. Поскольку на каждом шаге, кроме последнего, удаляется только одна строка или только один столбец, то в результате получается $n + m - 1$ базисных переменных и столько заполненных клеток, сколько требуется (даже если некоторые базисные переменные обратились в $0$).
 	
 	Трудности могут возникнуть и при улучшении базисного допустимого решения. Применение правил может обратить в 0 более одной базисной переменной. В этом случае важно помнить, что только одна из них должна стать небазисной; остальные следует сохранить базисными, но с нулевыми значениями.
+	
+	\textbf{Пример:}
+	
+	Построить первоначальный план для следующей ситуации:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{60}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{40}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+
+	$60 + 30 + 40 = 40 + 50 + 10 + 30$ — спрос равен предложению — задача закрытая. Методом северо — западного угла получим опорный план. Начинаем с самой верхней левой ячейки.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{60}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{40}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+	
+	Потребности первого магазина выполнены полностью, но на складе еще остался груз. Заполняем дальше. Остатки груза с первого склада $60 - 40 = 20$ перевозим в магазин второй. При этом, первый склад опустел, но потребности магазина не выполнены полностью.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{60}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{40}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+
+	Переходим ко второму складу. Все $30$ единиц груза переносим в магазин второй, потребности которого совпали с предложением склада $50 - 20 = 30$.
+	
+	При данном распределении склад опустошается и потребности второго магазина выполняются полностью. Происходит потеря базисной клетки.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{20} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{60}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{\textbf{0}} & \multicolumn{2}{c|}{0} & \multicolumn{1}{c|}{\multirow{2}{*}{30}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{0} & \multicolumn{2}{c|}{} & \multicolumn{2}{c|}{} & \multicolumn{1}{c|}{\multirow{2}{*}{40}} \\ \cline{2-9}
+			&  &  &  &  &  &  &  &  & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+
+	В данном случае необходимо к базисным клеткам добавить клетку с нулевым значением, расположенную рядом с только что заполненной, которая обусловила потерю.
+	
+	С третьего склада направим $10$ единиц груза в магазин $4$ для полного выполнения его потребностей. На $3$-м складе  остается $40 - 10 = 30$ единиц груза, которые перенесем в последний магазин.
+
+	Опорный план составлен. Количество базисных ячеек равно $6 = 3 + 4 - 1$.  Условие невырожденности выполнено.
+	
+	
 	\clearpage
 	
 \section{Методы решения}
@@ -651,7 +714,102 @@
 			\item Осуществляется перераспределение груза по циклу на величину $Q$. В результате выполнения этого пункта будет получен новый опорный план, который проверяется на оптимальность, т.е. производится переход к пункту 2.1 алгоритма.
 		\end{enumerate}
 	\end{enumerate}
-
+	
+	\textbf{Пример:} 
+	
+	Три завода производят однородную продукцию в количестве 650, 850 и 700 единиц соответственно. Эта продукция требуется четырем потребителям в количествах 500, 800, 300 и 600 единиц каждому. Затраты на перевозку единицы продукции (тыс. руб. ) от каждого завода к каждому потребителю заданы матрицей:
+	
+	\[
+		\begin{pmatrix}
+			30 & 50 & 62 & 10 \\
+			40 & 50 & 80 & 20 \\
+			50 & 10 & 30 & 30 \\
+		\end{pmatrix}
+	\]
+	
+	Требуется спланировать перевозку груза так, чтобы суммарные транспортные затраты были минимальными.
+	
+	Занесем данные транспортной задач и найдем опорный план перевозок продукции методом минимальной стоимости. Найденный план является невырожденным, так как в таблице заполнено ровно $m + n - 1 = 3 + 4 - 1 = 6$ клеток. Затраты на перевозку продукции для данного плана равны:
+	
+	\[
+		X = 1 \ 500 + 6 \ 000 + 18 \ 000 + 5 \ 000 + 24 \ 000 + 7 \ 000 = 61 \ 500
+	\]
+	
+	Применяя далее алгоритм решения задачи, находим потенциалы поставщиков и потребителей. Полагая $u_1 = 0$, определяем, что $v_1 = 30$, так как $u_1 + v_1 = 30$, и из соотношения $u_1 + v_4 = 10$ находим $v_4 = 10$. Аналогично найдены все другие потенциалы.
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|cc}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} & \multicolumn{1}{c|}{$u_i$} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{62} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{650}} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-9}
+			&  & 50 &  &  &  &  &  &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{80} & \multicolumn{2}{c|}{20} & \multicolumn{1}{c|}{\multirow{2}{*}{850}} & \multicolumn{1}{c|}{\multirow{2}{*}{10}} \\ \cline{2-9}
+			&  & 450 & \textbf{$\oplus$} & 100 & \textbf{$\ominus$} & 300 &  &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{30} & \multicolumn{1}{c|}{\multirow{2}{*}{700}} & \multicolumn{1}{c|}{\multirow{2}{*}{-30}} \\ \cline{2-9}
+			&  &  & \textbf{$\ominus$} & 700 & \textbf{$\oplus$} &  &  &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{500} & \multicolumn{2}{c|}{800} & \multicolumn{2}{c|}{300} & \multicolumn{2}{c|}{600} & \multicolumn{1}{c|}{$\begin{matrix}
+					& 2200 \\
+					2200 & \\
+				\end{matrix}$} &  \\ \cline{1-10}
+			$v_j$ & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{70} & \multicolumn{2}{c|}{10} &  &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+	
+	Найдем характеристики свободных клеток таблицы транспортной задачи по формуле
+	
+	\[
+		s_{ij} = c_{ij} - (u_i + v_j) 
+	\]
+	\[
+		s_{12} = 50 - (0 + 40) = 10, \ \ \ \ s_{13} = 62 - (0 + 70) = -8,
+	\]
+	\[
+		s_{24} = 20 - (10 + 10) = 0, \ \ \ \ s_{31} = 50 - (30 - 30) = 50,
+	\]
+	\[
+		s_{33} = 30 - (-30 + 70) = -10, \ \ \ \ s_{34} = 30 - (-30 + 10) = 50.
+	\]
+	
+	Так как $s_{13} < 0$ и $s_{33} < 0$, то план неоптимальный, и перспективной ячейкой в ней будет ячейка (3, 3) с наименьшей характеристикой $s_{33} = - 10$. 
+	
+	Строим цикл к перспективной клетке и находим величину перераспределения груза $Q = \min(300, 700) = 300$.
+	
+	Осуществляем перераспределение груза по циклу, добавляя величину $Q = 300$ в клетках со знаком $«+»$ и вычитая - в клетках со знаком $«-»$. В результате получаем новый опорный план.
+	
+	Применяя правило пункта 2 алгоритма к полученному плану транспортной задачи, убеждаемся, что он оптимальный, так как для всех свободных клеток таблицы $s_{ij} \geqslant 0$. Суммарные минимальные затраты на перевозку продукции:
+	
+	\[
+		Z_{\min} = 61 \ 500 - 10 \cdot 300 = 58 \ 500
+	\]
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|cc}
+			\hline
+			Пункты & \multicolumn{2}{c|}{B1} & \multicolumn{2}{c|}{B2} & \multicolumn{2}{c|}{B3} & \multicolumn{2}{c|}{B4} & \multicolumn{1}{c|}{Запасы} & \multicolumn{1}{c|}{$u_i$} \\ \hline
+			\multirow{2}{*}{A1} & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{62} & \multicolumn{2}{c|}{10} & \multicolumn{1}{c|}{\multirow{2}{*}{650}} & \multicolumn{1}{c|}{\multirow{2}{*}{0}} \\ \cline{2-9}
+			&  & 50 &  &  &  &  &  & 600 & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A2} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{80} & \multicolumn{2}{c|}{20} & \multicolumn{1}{c|}{\multirow{2}{*}{850}} & \multicolumn{1}{c|}{\multirow{2}{*}{10}} \\ \cline{2-9}
+			&  & 450 &  & 400 &  &  &  &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			\multirow{2}{*}{A3} & \multicolumn{2}{c|}{50} & \multicolumn{2}{c|}{10} & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{30} & \multicolumn{1}{c|}{\multirow{2}{*}{700}} & \multicolumn{1}{c|}{\multirow{2}{*}{-30}} \\ \cline{2-9}
+			&  &  &  & 400 &  & 300 &  &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} \\ \hline
+			Потребность & \multicolumn{2}{c|}{500} & \multicolumn{2}{c|}{800} & \multicolumn{2}{c|}{300} & \multicolumn{2}{c|}{600} & \multicolumn{1}{c|}{$\begin{matrix}
+					& 2200 \\
+					2200 & \\
+				\end{matrix}$} &  \\ \cline{1-10}
+			$v_j$ & \multicolumn{2}{c|}{30} & \multicolumn{2}{c|}{40} & \multicolumn{2}{c|}{70} & \multicolumn{2}{c|}{10} &  &  \\ \cline{1-9}
+		\end{tabular}
+	\end{center}
+	
+	Эти минимальные затраты достигаются при следующих объемах:
+	
+	\[
+		x_{11} = 50, \ \ \ x_{14} = 600, \ \ \ x_{21} = 450,
+	\]
+	\[
+		x_{22} = 400, \ \ \ x_{32} = 400, \ \ \ x_{33} = 300.
+	\]
+	
+	Остальные неизвестные оставляем равны нулю.
 	\clearpage
 
 	\subsection{Решение с помощью теории графов}
